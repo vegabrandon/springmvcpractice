@@ -22,7 +22,7 @@ public class Main {
         return new GreetResponse(
                 "Hello",
                 List.of("JavaScript", "GoLang", "Java"),
-                new Person("Alex")
+                new Person("Alex", 28, 300000.0)
         );
     }
     record Person(String name, int age, double savings) {}
