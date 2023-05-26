@@ -5,9 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-// Annotation required for SpringBootApps
+import java.util.List;
+
+// Annotation required for SpringBootApps, wrapper annotation
 @SpringBootApplication
-@RestController
+@RestController //
 public class Main {
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
@@ -16,7 +18,18 @@ public class Main {
 
     // Maps Get Request to Endpoint
     @GetMapping("/greet")
-    public String greet() {
-        return "Hello";
+    public GreetResponse greet() {
+        return new GreetResponse(
+                "Hello",
+                List.of("JavaScript", "GoLang", "Java"),
+                new Person("Alex")
+        );
     }
+    record Person(String name, int age, double savings) {}
+
+    record GreetResponse(
+            String greet,
+            List<String> favProgrammingLanguages,
+            Person person
+    ) {}
 }
